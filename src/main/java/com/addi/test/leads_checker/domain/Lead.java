@@ -1,22 +1,11 @@
 package com.addi.test.leads_checker.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import java.time.LocalDate;
 
-import java.time.LocalDateTime;
-
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
-public class Lead {
-    Long id;
-    String nationalIdNumber;
-    LocalDateTime dateOfBirth;
-    String firstName;
-    String lastName;
-    String email;
+public record Lead(Long id,
+        String nationalIdNumber,
+        LocalDate dateOfBirth,
+        String firstName,
+        String lastName,
+        String email) {
 }
