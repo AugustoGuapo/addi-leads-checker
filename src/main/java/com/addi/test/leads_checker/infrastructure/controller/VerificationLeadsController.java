@@ -9,10 +9,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@AllArgsConstructor
 public class VerificationLeadsController {
 
-    public AutomatedChecksService automatedChecksService;
+    private final AutomatedChecksService automatedChecksService;
+
+    public VerificationLeadsController(AutomatedChecksService automatedChecksService) {
+        this.automatedChecksService = automatedChecksService;
+    }
+
 
     @GetMapping("/leads/{leadId}/verify")
     public ResponseEntity<Verification> verifyLead(@PathVariable Integer leadId) {
