@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+import util.LeadStatuses;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -28,24 +29,24 @@ class VerificationLeadsControllerTest {
 
     @Test
     void verifyLeadReturnsOkWhenVerificationSucceeds() throws Exception {
-        Verification verification = new Verification(true, true, 100);
+        Verification verification = new Verification(true, true, 100, LeadStatuses.APPROVED);
         when(automatedChecksService.verify(1)).thenReturn(verification);
 
         mockMvc.perform(get("/leads/1/verify")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{\"person_exists\":true,\"is_background_clean\":true,\"score\":100}"));
+                .andExpect(content().json("{\"person_exists\":true,\"is_background_clean\":true,\"score\":100, \"status\":\"APPROVED\"}"));
     }
 
     @Test
     void verifyLeadReturnsOkWhenVerificationFails() throws Exception {
-        Verification verification = new Verification(false, false, null);
+        Verification verification = new Verification(false, false, null, LeadStatuses.DENIED);
         when(automatedChecksService.verify(1)).thenReturn(verification);
 
         mockMvc.perform(get("/leads/1/verify")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{\"person_exists\":false,\"is_background_clean\":false,\"score\":null}"));
+                .andExpect(content().json("{\"person_exists\":false,\"is_background_clean\":false,\"score\":null, \"status\":\"DENIED\"}"));
     }
 
     @Test
