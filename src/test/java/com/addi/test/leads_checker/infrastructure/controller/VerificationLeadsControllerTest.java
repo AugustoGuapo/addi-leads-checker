@@ -30,7 +30,7 @@ class VerificationLeadsControllerTest {
     @Test
     void verifyLeadReturnsOkWhenVerificationSucceeds() throws Exception {
         Verification verification = new Verification(true, true, 100, LeadStatuses.APPROVED);
-        when(automatedChecksService.verify(1)).thenReturn(verification);
+        when(automatedChecksService.verify(1L)).thenReturn(verification);
 
         mockMvc.perform(get("/leads/1/verify")
                         .contentType(MediaType.APPLICATION_JSON))
@@ -41,7 +41,7 @@ class VerificationLeadsControllerTest {
     @Test
     void verifyLeadReturnsOkWhenVerificationFails() throws Exception {
         Verification verification = new Verification(false, false, null, LeadStatuses.DENIED);
-        when(automatedChecksService.verify(1)).thenReturn(verification);
+        when(automatedChecksService.verify(1L)).thenReturn(verification);
 
         mockMvc.perform(get("/leads/1/verify")
                         .contentType(MediaType.APPLICATION_JSON))
@@ -51,7 +51,7 @@ class VerificationLeadsControllerTest {
 
     @Test
     void verifyLeadHandlesExceptionGracefully() throws Exception {
-        when(automatedChecksService.verify(1)).thenThrow(new RuntimeException("Test Exception"));
+        when(automatedChecksService.verify(1L)).thenThrow(new RuntimeException("Test Exception"));
 
         mockMvc.perform(get("/leads/1/verify")
                         .contentType(MediaType.APPLICATION_JSON))

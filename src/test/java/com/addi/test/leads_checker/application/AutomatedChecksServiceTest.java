@@ -44,7 +44,7 @@ class AutomatedChecksServiceTest {
     @Test
     void verifyReturnsCorrectVerificationWhenAllChecksPass() throws Exception {
         Lead lead = mock(Lead.class);
-        when(leadsService.findById(1)).thenReturn(Optional.of(lead));
+        when(leadsService.findById(1L)).thenReturn(Optional.of(lead));
         when(lead.nationalIdNumber()).thenReturn("123456789");
         when(lead.dateOfBirth()).thenReturn(LocalDate.of(2000, 1, 1));
         when(lead.firstName()).thenReturn("John");
@@ -53,7 +53,7 @@ class AutomatedChecksServiceTest {
         when(justiceCheckService.checkBackground("123456789")).thenReturn(true);
         when(scoringService.calculateLeadScore(lead)).thenReturn(100);
 
-        Verification verification = automatedChecksService.verify(1);
+        Verification verification = automatedChecksService.verify(1L);
 
         assertTrue(verification.isBackgroundClean());
         assertTrue(verification.personExists());
@@ -63,7 +63,7 @@ class AutomatedChecksServiceTest {
     @Test
     void verifyReturnsFalseVerificationWhenPersonVerificationFails() throws Exception {
         Lead lead = mock(Lead.class);
-        when(leadsService.findById(1)).thenReturn(Optional.of(lead));
+        when(leadsService.findById(1L)).thenReturn(Optional.of(lead));
         when(lead.nationalIdNumber()).thenReturn("123456789");
         when(lead.dateOfBirth()).thenReturn(LocalDate.of(2000, 1, 1));
         when(lead.firstName()).thenReturn("John");
@@ -71,7 +71,7 @@ class AutomatedChecksServiceTest {
         when(identificationService.verifyPerson(any(PersonDTO.class))).thenReturn(false);
         when(justiceCheckService.checkBackground("123456789")).thenReturn(true);
 
-        Verification verification = automatedChecksService.verify(1);
+        Verification verification = automatedChecksService.verify(1L);
 
         assertTrue(verification.isBackgroundClean());
         assertFalse(verification.personExists());
@@ -81,7 +81,7 @@ class AutomatedChecksServiceTest {
     @Test
     void verifyReturnsFalseVerificationWhenBackgroundCheckFails() throws Exception {
         Lead lead = mock(Lead.class);
-        when(leadsService.findById(1)).thenReturn(Optional.of(lead));
+        when(leadsService.findById(1L)).thenReturn(Optional.of(lead));
         when(lead.nationalIdNumber()).thenReturn("123456789");
         when(lead.dateOfBirth()).thenReturn(LocalDate.of(2000, 1, 1));
         when(lead.firstName()).thenReturn("John");
@@ -89,7 +89,7 @@ class AutomatedChecksServiceTest {
         when(identificationService.verifyPerson(any(PersonDTO.class))).thenReturn(true);
         when(justiceCheckService.checkBackground("123456789")).thenReturn(false);
 
-        Verification verification = automatedChecksService.verify(1);
+        Verification verification = automatedChecksService.verify(1L);
 
         assertTrue(verification.personExists());
         assertFalse(verification.isBackgroundClean());
@@ -98,15 +98,15 @@ class AutomatedChecksServiceTest {
 
     @Test
     void verifyReturnsFalseVerificationWhenLeadNotFound() {
-        when(leadsService.findById(1)).thenReturn(Optional.empty());
+        when(leadsService.findById(1L)).thenReturn(Optional.empty());
 
-        assertThrows(IllegalArgumentException.class, () -> automatedChecksService.verify(1));
+        assertThrows(IllegalArgumentException.class, () -> automatedChecksService.verify(1L));
     }
 
     @Test
     void verifyReturnsFalseVerificationWhenExceptionOccurs() throws Exception {
         Lead lead = mock(Lead.class);
-        when(leadsService.findById(1)).thenReturn(Optional.of(lead));
+        when(leadsService.findById(1L)).thenReturn(Optional.of(lead));
         when(lead.nationalIdNumber()).thenReturn("123456789");
         when(lead.dateOfBirth()).thenReturn(LocalDate.of(2000, 1, 1));
         when(lead.firstName()).thenReturn("John");
@@ -114,6 +114,6 @@ class AutomatedChecksServiceTest {
         when(identificationService.verifyPerson(any(PersonDTO.class))).thenThrow(new RuntimeException("Test Exception"));
         when(justiceCheckService.checkBackground("123456789")).thenReturn(true);
 
-        assertThrows(RuntimeException.class, () -> automatedChecksService.verify(1));
+        assertThrows(RuntimeException.class, () -> automatedChecksService.verify(1L));
     }
 }

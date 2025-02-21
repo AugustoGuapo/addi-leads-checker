@@ -30,7 +30,7 @@ public class AutomatedChecksService {
         this.scoringService = scoringService;
     }
 
-    public Verification verify(Integer leadId) {
+    public Verification verify(Long leadId) {
         return leadsService.findById(leadId)
                 .map(lead -> {
                     CompletableFuture<Boolean> personVerifiedFuture = CompletableFuture.supplyAsync(() ->

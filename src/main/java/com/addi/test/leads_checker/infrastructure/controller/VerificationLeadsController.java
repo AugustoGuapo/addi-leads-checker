@@ -18,7 +18,7 @@ public class VerificationLeadsController {
 
 
     @GetMapping("/leads/{leadId}/verify")
-    public ResponseEntity<Verification> verifyLead(@PathVariable Integer leadId) {
+    public ResponseEntity<Verification> verifyLead(@PathVariable Long leadId) {
         return ResponseEntity.ok(automatedChecksService.verify(leadId));
     }
 }
