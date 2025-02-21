@@ -1,4 +1,4 @@
-package com.addi.test.leads_checker.infrastructure.service;
+package com.addi.test.leads_checker.infrastructure.rest;
 
 import com.addi.test.leads_checker.domain.NationalIdentificationService;
 import com.addi.test.leads_checker.domain.PersonDTO;

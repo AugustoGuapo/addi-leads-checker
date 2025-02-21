@@ -1,4 +1,4 @@
-package com.addi.test.leads_checker.infrastructure.service;
+package com.addi.test.leads_checker.infrastructure.rest;
 
 import com.addi.test.leads_checker.domain.JusticeCheckService;
 import org.springframework.stereotype.Service;
