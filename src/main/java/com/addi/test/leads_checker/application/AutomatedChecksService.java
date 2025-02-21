@@ -7,6 +7,7 @@ import com.addi.test.leads_checker.domain.NationalIdentificationService;
 import com.addi.test.leads_checker.domain.PersonDTO;
 import com.addi.test.leads_checker.domain.Verification;
 import org.springframework.stereotype.Service;
+import util.LeadStatuses;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -47,7 +48,8 @@ public class AutomatedChecksService {
                         boolean personVerified = personVerifiedFuture.get();
                         boolean cleanBackground = cleanBackgroundFuture.get();
                         Integer score = (personVerified && cleanBackground) ? scoringService.calculateLeadScore(lead) : null;
-                        return new Verification(personVerified, cleanBackground, score);
+                        LeadStatuses status = (personVerified && cleanBackground && score >= 60) ? LeadStatuses.APPROVED : LeadStatuses.DENIED;
+                        return new Verification(personVerified, cleanBackground, score, status);
                     } catch (InterruptedException | ExecutionException e) {
                         throw new RuntimeException(e.getCause());
                     }
