@@ -26,10 +26,15 @@ Mainly divided into two types:
 - **Unit Tests**: Unit tests have been created for domain classes and domain services.
 - **Integration Tests**: Integration tests have been created for the application's controller.
 
-## 5. External Services to the Domain
+## 5. External Services
 
 As suggested in the functional specification document, external services are mocked internally to ensure the 
 application's functionality. Given the architecture used for the project, the impact is minimal if the application were 
 to be used in production in the future, as it would only require re-implementing external services and adapting them to 
 the existing interfaces.
 
+## 6. Manual testing
+
+For manual testing purposes, a postman collection has been created to test the application's endpoints. 
+The collection is inside the `postman_collection` folder. Each request has a brief explanation of 
+the expected result and why it is like that.
