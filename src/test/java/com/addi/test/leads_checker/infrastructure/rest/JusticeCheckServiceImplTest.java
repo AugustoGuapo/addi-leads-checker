@@ -1,5 +1,6 @@
 package com.addi.test.leads_checker.infrastructure.rest;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -10,23 +11,25 @@ class JusticeCheckServiceImplTest {
 
     JusticeCheckServiceImpl justiceCheckService;
 
+    @BeforeEach
+    void setUp() {
+        justiceCheckService = new JusticeCheckServiceImpl();
+    }
+
     @Test
     void shouldJusticeCheckReturnTrue() {
-        justiceCheckService = new JusticeCheckServiceImpl();
         Boolean result = justiceCheckService.checkBackground("123456789");
         assertTrue(result);
     }
 
     @Test
     void shouldJusticeCheckReturnFalse() {
-        justiceCheckService = new JusticeCheckServiceImpl();
         Boolean result = justiceCheckService.checkBackground("987654321");
         assertFalse(result);
     }
 
     @Test
     void shouldThrowIllegalArgumentException() {
-        justiceCheckService = new JusticeCheckServiceImpl();
         assertThrows(IllegalArgumentException.class, () -> justiceCheckService.checkBackground("1234567890"));
     }
 
