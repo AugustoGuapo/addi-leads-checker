@@ -1,0 +1,105 @@
+{
+	"info": {
+		"_postman_id": "332cf707-d3bc-452e-871a-21802eb9704d",
+		"name": "Addi leads-checker collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37311680"
+	},
+	"item": [
+		{
+			"name": "NEVER APPROVED - bad first name on lead",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/leads/1/verify",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"leads",
+						"1",
+						"verify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NEVER APPROVED - has justice problems",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/leads/2/verify",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"leads",
+						"2",
+						"verify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NEVER APPROVED - bad last name on lead",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/leads/3/verify",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"leads",
+						"3",
+						"verify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NEVER APPROVED -has justice problems",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/leads/4/verify",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"leads",
+						"4",
+						"verify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CAN BE APPROVED- names and justice good, depends on score",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/leads/5/verify",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"leads",
+						"5",
+						"verify"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
